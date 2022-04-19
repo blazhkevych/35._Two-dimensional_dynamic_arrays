@@ -1,5 +1,6 @@
 ﻿#include <iostream>
-#include "lib.h"
+#include "TwoDimensionalArray.h"
+#include "OneDimensionalArray.h"
 using std::cout;
 using std::endl;
 using std::cin;
@@ -10,16 +11,16 @@ int main()
 	int choice{ 0 }; // Выбор задания
 	do
 	{
-		cout << "Enter task number:: "
+		/*cout << "Enter task number:: "
 			<< "\nTask 1."
 			<< "\nTask 2."
 			<< "\nTask 3."
 			<< "\nTask 4."
 			<< endl << endl;
 		cin >> choice;
-		cin.get();
+		cin.get();*/
 
-		switch (choice)
+		switch (4)
 		{
 		case 1:
 		{
@@ -28,7 +29,24 @@ int main()
 			начало двумерного динамического массива.
 			*/
 			//2:46:15
+			srand(time(0));
+			int** ptr, rows, cols;
+			cout << "Enter quantity of rows and cols: ";
+			cin >> rows >> cols;
 
+			ptr = Allocate(rows, cols);
+			Init(ptr, rows, cols);
+			Print(ptr, rows, cols);
+
+			int* mas = Allocate(cols);
+			Init(mas, cols);
+			Print(mas, cols);
+
+			ptr = AddStringBegin(ptr, &rows, cols, mas);
+			Print(ptr, rows, cols);
+
+			Free(mas);
+			Free(ptr, rows);
 		}
 		break;
 
@@ -38,7 +56,23 @@ int main()
 			2. Написать функцию, удаляющую строку (одномерный массив) в
 			двумерном динамическом массиве по указанному индексу.
 			*/
+			//1:13:40 удаление двумерного массива
+			srand(time(0));
+			int** ptr, rows, cols, index;
+			cout << "Enter quantity of rows and cols: ";
+			cin >> rows >> cols;
 
+			ptr = Allocate(rows, cols);
+			Init(ptr, rows, cols);
+			Print(ptr, rows, cols);
+
+			cout << "Enter an index to delete: ";
+			cin >> index;
+
+			ptr = DeleteString(ptr, &rows, cols, index);
+			Print(ptr, rows, cols);
+
+			Free(ptr, rows);
 		}
 		break;
 
@@ -48,7 +82,25 @@ int main()
 			3. Написать функцию, добавляющую столбец в начало двумерного
 			динамического массива.
 			*/
+			//2:47:28
+			srand(time(0));
+			int** ptr, rows, cols;
+			cout << "Enter quantity of rows and cols: ";
+			cin >> rows >> cols;
 
+			ptr = Allocate(rows, cols);
+			Init(ptr, rows, cols);
+			Print(ptr, rows, cols);
+
+			int* mas = Allocate(rows);
+			Init(mas, rows);
+			Print(mas, rows);
+
+			ptr = AddColumnBegin(ptr, rows, &cols, mas);
+			Print(ptr, rows, cols);
+
+			Free(ptr, rows);
+			Free(mas);
 		}
 		break;
 
@@ -58,7 +110,23 @@ int main()
 			4. Написать функцию, удаляющую столбец в двумерном динамическом
 			массиве по указанному индексу.
 			*/
+			//2:48:07
+			srand(time(0));
+			int** ptr, rows, cols, index;
+			cout << "Enter quantity of rows and cols: ";
+			cin >> rows >> cols;
 
+			ptr = Allocate(rows, cols);
+			Init(ptr, rows, cols);
+			Print(ptr, rows, cols);
+
+			cout << "Enter an index to delete: ";
+			cin >> index;
+
+			ptr = DeleteColumn(ptr, rows, &cols, index);
+			Print(ptr, rows, cols);
+
+			Free(ptr, rows);
 		}
 		break;
 		case 5:
@@ -67,6 +135,16 @@ int main()
 			5. Написать функцию, копирующую двумерный динамический массив в
 			одномерный динамический массив.
 			*/
+			//2:48:35
+			srand(time(0));
+			int** ptr, rows, cols;
+			cout << "Enter quantity of rows and cols: ";
+			cin >> rows >> cols;
+
+			ptr = Allocate(rows, cols);
+			Init(ptr, rows, cols);
+			Print(ptr, rows, cols);
+
 
 		}
 		break;
