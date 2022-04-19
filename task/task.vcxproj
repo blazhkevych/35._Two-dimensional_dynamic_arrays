@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="lib.cpp" />
+    <ClCompile Include="OneDimensionalArray.cpp" />
     <ClCompile Include="task.cpp" />
+    <ClCompile Include="TwoDimensionalArray.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib.h" />
+    <ClInclude Include="OneDimensionalArray.h" />
+    <ClInclude Include="TwoDimensionalArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
