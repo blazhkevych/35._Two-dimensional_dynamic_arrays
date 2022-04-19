@@ -11,16 +11,16 @@ int main()
 	int choice{ 0 }; // Выбор задания
 	do
 	{
-		/*cout << "Enter task number:: "
+		cout << "Enter task number:: "
 			<< "\nTask 1."
 			<< "\nTask 2."
 			<< "\nTask 3."
 			<< "\nTask 4."
 			<< endl << endl;
 		cin >> choice;
-		cin.get();*/
+		cin.get();
 
-		switch (4)
+		switch (choice)
 		{
 		case 1:
 		{
@@ -145,7 +145,16 @@ int main()
 			Init(ptr, rows, cols);
 			Print(ptr, rows, cols);
 
+			int* mas = Copies2DimDynArrTo1DimDynArr(ptr, rows, cols);
 
+			Free(ptr, rows);
+
+			for (int i = 0; i < rows * cols; i++)
+			{
+				cout << mas[i] << ' ';
+			}
+
+			Free(mas);
 		}
 		break;
 		}

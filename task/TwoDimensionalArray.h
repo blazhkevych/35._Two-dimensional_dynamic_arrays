@@ -33,3 +33,7 @@ int** InsertColumn(int** p, int rows, int* cols, int index, const int* mas);
 
 // функция удаления столбца (одномерного массива) по указанному индексу двухмерного массива
 int** DeleteColumn(int** p, int rows, int* cols, int index);
+
+// Функция, копирует двумерный динамический массив в
+// одномерный динамический массив.
+int* Copies2DimDynArrTo1DimDynArr(int** p, int rows, int cols);

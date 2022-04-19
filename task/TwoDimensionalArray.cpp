@@ -217,3 +217,23 @@ int** DeleteColumn(int** p, int rows, int* cols, int index)
 
 	return ptr;
 }
+
+// Функция, копирует двумерный динамический массив в
+// одномерный динамический массив.
+int* Copies2DimDynArrTo1DimDynArr(int** p, int rows, int cols)
+{
+	int size1D = rows * cols;
+	int* mas = new int[size1D];
+
+	int k{ 0 };
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			mas[k] = p[i][j];
+			k++;
+		}
+	}
+
+	return mas;
+}
