@@ -16,6 +16,7 @@ int main()
 			<< "\nTask 2."
 			<< "\nTask 3."
 			<< "\nTask 4."
+			<< "\nTask 5."
 			<< endl << endl;
 		cin >> choice;
 		cin.get();
@@ -149,10 +150,7 @@ int main()
 
 			Free(ptr, rows);
 
-			for (int i = 0; i < rows * cols; i++)
-			{
-				cout << mas[i] << ' ';
-			}
+			Print(mas, rows * cols);
 
 			Free(mas);
 		}
