@@ -13,6 +13,14 @@ int** Allocate(int rows, int cols)
 	return ptr;
 }
 
+//  функция создания двумерного динамического массива
+void Allocate(int**& p, int rows, int cols)
+{
+	p = new int* [rows];
+	for (int i = 0; i < rows; i++)
+		p[i] = new int[cols];
+}
+
 // функция удаления двумерного динамического массива
 void Free(int** p, int rows)
 {
@@ -75,6 +83,23 @@ int** AddStringBegin(int** p, int* rows, int cols, const int* mas)
 	return ptr;
 }
 
+// функция добавления строки (одномерного массива) в начало двухмерного массива
+void AddStringBegin(int**& p, int& rows, int cols, const int* mas)
+{
+	int** ptr = new int* [++rows];
+	int j{ 1 };
+	for (int i = 0; i < rows - 1; i++)
+	{
+		ptr[j] = p[i];
+		j++;
+	}
+	ptr[0] = new int[cols];
+	for (int i = 0; i < cols; i++)
+		ptr[0][i] = mas[i];
+	delete[] p;
+	p = ptr;
+}
+
 // функция вставки строки (одномерного массива) в указанную позицию двухмерного массива
 int** InsertString(int** p, int* rows, int cols, int index, const int* mas)
 {
@@ -127,6 +152,36 @@ int** DeleteString(int** p, int* rows, int cols, int index)
 	return ptr;
 }
 
+// Функция, удаляющая строку (одномерный массив) в двумерном динамическом массиве по указанному индексу.
+void DeleteString(int**& p, int& rows, int cols, int index)
+{
+	if (index >= rows || index < 0)
+		return;
+	int** ptr = new int* [--rows];
+	int j = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		if (i == index)
+		{
+			j++;
+			ptr[i] = p[j];
+		}
+		else if (j < index)
+		{
+			ptr[i] = p[j];
+			j++;
+		}
+		else if (j > index)
+		{
+			j++;
+			ptr[i] = p[j];
+		}
+	}
+	Free(p[index]);
+	delete[] p;
+	p = ptr;
+}
+
 //  функция добавления столбца (одномерного массива) в конец двухмерного массива
 int** AddColumnEnd(int** p, int rows, int* cols, const int* mas)
 {
@@ -155,6 +210,21 @@ int** AddColumnBegin(int** p, int rows, int* cols, const int* mas)
 	}
 	Free(p, rows);
 	return ptr;
+}
+
+//  функция добавления столбца (одномерного массива) в начало двухмерного массива
+void AddColumnBegin(int**& p, int rows, int& cols, const int* mas)
+{
+	++cols;
+	int** ptr = Allocate(rows, cols);
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols - 1; j++)
+			ptr[i][j + 1] = p[i][j];
+		ptr[i][0] = mas[i];
+	}
+	Free(p, rows);
+	p = ptr;
 }
 
 // функция вставки столбца (одномерного массива) в указанную позицию двухмерного массива
@@ -218,6 +288,42 @@ int** DeleteColumn(int** p, int rows, int* cols, int index)
 	return ptr;
 }
 
+// функция удаления столбца (одномерного массива) по указанному индексу двухмерного массива
+void DeleteColumn(int**& p, int rows, int& cols, int index)
+{
+	if (index < 0 || index >= cols)
+		return;
+	--cols;
+	int** ptr = Allocate(rows, cols);
+	int k{ 0 };
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			if (j == index)
+			{
+				k++;
+				ptr[i][j] = p[i][k];
+			}
+			else if (j < index)
+			{
+				ptr[i][j] = p[i][k];
+				k++;
+			}
+			else if (j > index)
+			{
+				k++;
+				ptr[i][j] = p[i][k];
+			}
+		}
+		k = 0;
+	}
+
+	Free(p, rows);
+
+	p = ptr;
+}
+
 // Функция, копирует двумерный динамический массив в
 // одномерный динамический массив.
 int* Copies2DimDynArrTo1DimDynArr(int** p, int rows, int cols)
@@ -236,4 +342,24 @@ int* Copies2DimDynArrTo1DimDynArr(int** p, int rows, int cols)
 	}
 
 	return mas;
+}
+
+// Функция, копирует двумерный динамический массив в
+// одномерный динамический массив.
+void Copies2DimDynArrTo1DimDynArr(int**& p, int rows, int cols, int*& arr)
+{
+	int size1D = rows * cols;
+	int* mas = new int[size1D];
+
+	int k{ 0 };
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			mas[k] = p[i][j];
+			k++;
+		}
+	}
+
+	arr = mas;
 }

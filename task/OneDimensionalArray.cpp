@@ -28,6 +28,12 @@ int* Allocate(int size)
 	return new int[size];
 }
 
+// функция создания динамического массива
+void Allocate(int*& ptr, int size)
+{
+	ptr = new int[size];
+}
+
 // функция удаления динамического массива
 void Free(int* ptr)
 {
